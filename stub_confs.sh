@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 # need to get the remote.conf in there
 # this isn't really needed since env are provided via docker.
@@ -33,7 +33,7 @@ CHANNEL_SETUP=none
 REGTEST_BLOCK_TIME=5
 CLN_COUNT=${NODE_COUNT}
 DEPLOY_CLAMS_REMOTE=false
-DIRECT_LINK_FRONTEND_URL_OVERRIDE_FQDN=beta.clams.tech
+DIRECT_LINK_FRONTEND_URL_OVERRIDE_FQDN=remote.clams.tech
 CLIGHTNING_WEBSOCKET_EXTERNAL_PORT=${STARTING_EXTERNAL_PORT}
 LNPLAY_SERVER_PATH=${LNPLAY_CONF_PATH}
 CONNECTION_STRING_CSV_PATH=${CONNECTION_STRINGS_PATH}

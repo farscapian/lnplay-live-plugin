@@ -23,6 +23,11 @@ def printout(s):
 
 plugin = Plugin()
 
+
+
+
+
+
 class HostMapping:
     def __init__(self, slot_name, mac_address, starting_external_port):
         self.slot_name = slot_name
@@ -42,8 +47,12 @@ class HostMapping:
         return f"slot: {self.slot_name} mac: {self.mac_address} port: {self.starting_external_port}"
 
 @plugin.init()  # Decorator to define a callback once the `init` method call has successfully completed
+
 def init(options, configuration, plugin, **kwargs):
     plugin.log("lnplay.live - Provisioning plugin initialized.")
+
+def deprovision():
+    plugin.log("lnplay.live - DEPROVISIONING LOGIC GOES HERE")
 
 @plugin.subscribe("invoice_payment")
 def on_payment(plugin, invoice_payment, **kwargs):
@@ -153,7 +162,8 @@ def on_payment(plugin, invoice_payment, **kwargs):
 
         try:
             plugin.log(f"Starting lnplay provisioning script for Order {invoice_id}")
-            result = subprocess.run([provision_script_path] + params) #, capture_output=True, text=True, check=True)
+            result = subprocess.run([provision_script_path] + params, stdout=subprocess.PIPE, text=True, check=True)
+             #, capture_output=True, text=True, check=True)
             plugin.log(result.stdout)
             plugin.log(result.stderr)
             plugin.log(f"Completed provisioning script for order {invoice_id}")
@@ -258,5 +268,6 @@ def getAllSlots():
             host_mappings.append(host_mapping)
 
     return host_mappings
+
 
 plugin.run()  # Run our plugin
