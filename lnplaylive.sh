@@ -2,6 +2,8 @@
 
 set -exu
 
+echo ""
+
 PROJECTS_CONF_PATH="$HOME/ss/projects"
 REMOTE_CONF_PATH="$HOME/ss/remotes/$(incus remote get-default)"
 mkdir -p "$REMOTE_CONF_PATH" > /dev/null
